@@ -26,15 +26,16 @@ body {
 #simple_layout_skip {
 	background-color: lighten($grey, 35%);
 	position: relative;
-	margin:0
+	margin:0;
+	
 	&>a {
 		display: block;
 		text-align: center;
 		line-height:28px;
 		height:0px;
-		overflow: hidden
+		overflow: hidden;
 		&:focus {
-			height: auto
+			height: auto;
 		}
 	}
 }
