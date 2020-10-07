@@ -3,7 +3,22 @@
 	/* 3-order */
 	$x: $base - 1;
 	
-	@return (1 + ($exponent * $x) + ($exponent * ($exponent - 1)/2*($x * $x)) + ($exponent * ($exponent - 1) * ($exponent - 2)/2/3*($x * $x * $x)));
+	$i: 1;
+	$output: 1;
+	@while $i < 4 {
+		$temp: 1;
+		$j: 0;
+		@while $j < $i {
+			$temp: $temp * ($exponent - $j) / (1 + $j) * $x;
+			
+			$j: $j + 1;
+		}
+		$i: $i + 1;
+		$output: $output + $temp;
+	}
+	
+	
+	@return ($output);
 }
 
 @function luminance($color) {
@@ -16,7 +31,7 @@
 
 	@each $name, $value in $RGB {
 
-		@if $value < 0.03928 {
+		@if $value <= 0.03928 {
 			$value: $value / 12.92;
 		} @else {
 			$value: ($value + 0.055) / 1.055;
@@ -35,11 +50,28 @@
 	
 	$backgroundL: luminance($background-color);
 
-	@if abs( $blackL - $backgroundL ) > abs( $whiteL - $backgroundL ) {
+	@if abs( ($backgroundL + 0.05) / ($blackL + 0.05) ) > abs( ($whiteL + 0.05) / ($backgroundL + 0.05) ) {
 		$return: 0;
 	} @else {
 		$return: 255;
 	}
+	/*
+	$i: 1;
+	@while $i < 5 {
+		$tempLight: luminance(lighten($primary-color, 10% * $i));
+		$tempDark: luminance(darken($primary-color, 10% * $i));
+		@if abs( ($backgroundL + 0.05) / ($tempDark + 0.05) ) > 6 or abs( ($tempLight + 0.05) / ($backgroundL + 0.05) ) > 6 {
+			@if abs( ($backgroundL + 0.05) / ($tempDark + 0.05) ) > abs( ($tempLight + 0.05) / ($backgroundL + 0.05) ) {
+				@return darken($primary-color, 10% * $i);
+				
+			} @else {
+				@return lighten($primary-color, 10% * $i);
+			}
+		}
+		$i: $i + 1;
+		
+	}
+	*/
 
 	@return rgb($return, $return, $return);
 }
@@ -98,10 +130,6 @@ body {
 			margin:0 auto;
 			padding:20px 5px;
 			box-sizing: border-box;
-			lumiW: luminance(rgb(255, 255, 255));
-			lumiB: luminance(rgb(0, 0, 0));
-			lumiP: luminance(lighten($primary-color, 10%));
-			lumiP20: luminance(lighten($primary-color, 20%));
 			color: layoutBW(lighten($primary-color, 10%));
 			a {
 				font-size:32px;
