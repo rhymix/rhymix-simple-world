@@ -100,7 +100,7 @@
 					<li><a href="{getUrl('act', 'dispMemberLogout')}">{lang('member.cmd_logout')}</a></li>
 				</ul>
 			</li>
-			<li loop="$GNB->list=>$key1,$val1" class="<!--@if($val1['selected'])-->active <!--@endif--><!--@if($val1['list'])-->layout_dropdown<!--@endif-->">
+			<li loop="$GNB->list=>$key1,$val1" cond="$val1['href'] || $val1['list']" class="<!--@if($val1['selected'])-->active <!--@endif--><!--@if($val1['list'])-->layout_dropdown<!--@endif-->">
 				<a href="{$val1['href']}" target="_blank"|cond="$val1['open_window']=='Y'"><span>{$val1['link']}</span></a>
 				<ul cond="$val1['list']" class="layout_dropdown-content">
 					<li loop="$val1['list']=>$key2,$val2" class="active"|cond="$val2['selected']">
