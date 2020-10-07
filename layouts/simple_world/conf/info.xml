@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <layout version="0.2">
 	<title xml:lang="ko">네모의 꿈</title>
-	<title xml:lang="en">Rectangular World</title>
+	<title xml:lang="en">Simple World</title>
 	<description xml:lang="ko">깔끔한 면과 그림자 레이아웃</description>
-	<description xml:lang="en">Simple rectangular planes and shadows</description>
+	<description xml:lang="en">Rectangular planes and shadows</description>
 	<version>1.1.0</version>
-	<date>2017-03-10</date>
+	<date>2020-10-07</date>
 	<author email_address="misol.kr@gmail.com" link="https://github.com/misol">
 		<name xml:lang="ko">misol</name>
 		<name xml:lang="en">misol</name>
