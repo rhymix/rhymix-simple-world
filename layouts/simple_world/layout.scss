@@ -1,9 +1,42 @@
 @charset "UTF-8";
-@function layoutGrayContrast($color, $ratio) {
-	$grayColor: grayscale($color);
-	$grayValue: red($grayColor);
+@function taylor-pow($base, $exponent) {
+	/* 3-order */
+	$x: $base - 1;
+	
+	@return (1 + ($exponent * $x) + ($exponent * ($exponent - 1)/2*($x * $x)) + ($exponent * ($exponent - 1) * ($exponent - 2)/2/3*($x * $x * $x)));
+}
 
-	@if $grayValue > ($ratio * 255) {
+@function luminance($color) {
+	/* https://www.w3.org/TR/2008/REC-WCAG20-20081211/#relativeluminancedef */
+	$RGB: (
+		'R': red($color) / 255,
+		'G': green($color) / 255,
+		'B': blue($color) / 255
+	);
+
+	@each $name, $value in $RGB {
+
+		@if $value < 0.03928 {
+			$value: $value / 12.92;
+		} @else {
+			$value: ($value + 0.055) / 1.055;
+			$value: taylor-pow($value, 2.4);
+		}
+
+		$RGB: map-merge($RGB, ($name: $value) );
+	}
+
+	@return (map-get($RGB, 'R') * .2126) + (map-get($RGB, 'G') * .7152) + (map-get($RGB, 'B') * .0722);
+}
+
+
+@function layoutBW($background-color) {
+	$blackL: luminance(rgb(0, 0, 0));
+	$whiteL: luminance(rgb(255, 255, 255));
+	
+	$backgroundL: luminance($background-color);
+
+	@if abs( $blackL - $backgroundL ) > abs( $whiteL - $backgroundL ) {
 		$return: 0;
 	} @else {
 		$return: 255;
@@ -11,6 +44,7 @@
 
 	@return rgb($return, $return, $return);
 }
+
 
 @mixin layout_box($shadow){
 	background: #fff;
@@ -66,11 +100,15 @@ body {
 			margin:0 auto;
 			padding:20px 5px;
 			box-sizing: border-box;
-			color: layoutGrayContrast(lighten($primary-color, 10%), 0.710);
+			lumiW: luminance(rgb(255, 255, 255));
+			lumiB: luminance(rgb(0, 0, 0));
+			lumiP: luminance(lighten($primary-color, 10%));
+			lumiP20: luminance(lighten($primary-color, 20%));
+			color: layoutBW(lighten($primary-color, 10%));
 			a {
 				font-size:32px;
 				text-decoration: none;
-				color: layoutGrayContrast(lighten($primary-color, 10%), 0.710);
+				color: layoutBW(lighten($primary-color, 10%));
 				padding:0 5px;
 			}
 		}
@@ -107,24 +145,30 @@ body {
 						border-radius: 0;
 						border: none;
 						background: lighten($primary-color, 20%);
-						color: layoutGrayContrast(lighten($primary-color, 20%), 0.710);
+						color: layoutBW(lighten($primary-color, 20%));
+						&::placeholder {
+							color: layoutBW(lighten($primary-color, 20%));
+						}
 						&:hover, &:active, &:focus {
 							background: lighten($primary-color, 50%);
-							color: layoutGrayContrast(lighten($primary-color, 50%), 0.710);
+							color: layoutBW(lighten($primary-color, 50%));
+							&::placeholder {
+								color: layoutBW(lighten($primary-color, 50%));
+							}
 						}
 					}
 					
 					&[type="submit"] {
 						vertical-align: bottom;
 						background: lighten($primary-color,15%);
-						color: layoutGrayContrast(lighten($primary-color, 15%), 0.710);
+						color: layoutBW(lighten($primary-color, 15%));
 						border: none;
 						height:32px;
 						padding:0 15px;
 						margin:0;
 						&:hover, &:active, &:focus {
 							background:$primary-color;
-							color: layoutGrayContrast($primary-color, 0.710);
+							color: layoutBW($primary-color);
 						}
 					}
 				}
@@ -276,7 +320,7 @@ body {
 		
 		li.active>a {
 			background-color: lighten($primary-color, 15%);
-			color: layoutGrayContrast(lighten($primary-color, 15%), 0.710);
+			color: layoutBW(lighten($primary-color, 15%));
 		}
 		
 		&>ul{
@@ -310,7 +354,7 @@ body {
 	.layout_language li:focus button,
 	.layout_language li:active button {
 		background-color: $primary-color;
-		color: layoutGrayContrast($primary-color, 0.710);
+		color: layoutBW($primary-color);
 	}
 	.layout_menu {
 		.layout_dropdown {
@@ -338,7 +382,7 @@ body {
 					&:focus {
 						display: block;
 						background-color: lighten($primary-color, 10%);
-						color: layoutGrayContrast(lighten($primary-color, 10%), 0.710);
+						color: layoutBW(lighten($primary-color, 10%));
 					}
 				}
 			}
@@ -573,7 +617,7 @@ body {
 			}
 			
 			&>a {
-				color: layoutGrayContrast(lighten($primary-color, 10%), 0.710);
+				color: layoutBW(lighten($primary-color, 10%));
 			}
 		}
 
@@ -630,13 +674,13 @@ body {
 
 		.layout_menu li.active>a {
 			background-color: lighten($primary-color, 15%);
-			color: layoutGrayContrast(lighten($primary-color, 15%), 0.710);
+			color: layoutBW(lighten($primary-color, 15%));
 		}
 
 		.layout_menu li a:hover, .layout_dropdown:hover .dropbtn,
 		.layout_menu li a:focus, .layout_dropdown:focus .dropbtn {
 			background-color: $primary-color;
-			color: layoutGrayContrast($primary-color, 10%, 0.710);
+			color: layoutBW($primary-color, 10%);
 		}
 
 		.layout_menu li.layout_dropdown {
@@ -647,14 +691,14 @@ body {
 			display: block;
 			position: relative;
 			background-color: lighten($grey, 35%);
-			color: layoutGrayContrast(lighten($grey, 35%), 0.710);
+			color: layoutBW(lighten($grey, 35%));
 			width: 100%;
 			min-width: 100%;
 			box-shadow: none;
 			z-index:1;
 			a {
 				background-color: lighten($grey, 35%);
-				color: layoutGrayContrast(lighten($grey, 35%), 0.710);
+				color: layoutBW(lighten($grey, 35%));
 				padding: 15px 30px;
 				text-decoration: none;
 				display: block;
