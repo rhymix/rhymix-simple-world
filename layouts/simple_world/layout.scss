@@ -29,7 +29,6 @@
 	@return (map-get($RGB, 'R') * .2126) + (map-get($RGB, 'G') * .7152) + (map-get($RGB, 'B') * .0722);
 }
 
-
 @function layoutBW($background-color) {
 	$blackL: luminance(rgb(0, 0, 0));
 	$whiteL: luminance(rgb(255, 255, 255));
@@ -44,7 +43,6 @@
 
 	@return rgb($return, $return, $return);
 }
-
 
 @mixin layout_box($shadow){
 	background: #fff;
