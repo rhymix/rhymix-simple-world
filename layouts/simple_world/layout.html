@@ -1,4 +1,3 @@
-<!--// responsible layout -->
 <load target="./lang" />
 
 {@
@@ -38,16 +37,25 @@
 
 	$oMemberModel = getModel('member');
 	$member_config = $oMemberModel->getMemberConfig();
-
+	
+	// theme-color
+	Context::addMetaTag("theme-color", $material_colors[$layout_info->primary_color]);
+	
+	// Load styles
+	$primary_color = sscanf($material_colors[$layout_info->primary_color], "#%02x%02x%02x");
+	$content_color = sscanf($layout_info->content_color, "#%02x%02x%02x");
+	Context::set('layout_css_value', array(
+		'primary_color_R' => $primary_color[0],
+		'primary_color_G' => $primary_color[1],
+		'primary_color_B' => $primary_color[2],
+		
+		'content_color_R' => $content_color[0],
+		'content_color_G' => $content_color[1],
+		'content_color_B' => $content_color[2],
+		
+		'menu_position' => $layout_info->menu_position));
 }
-
-
-<!--// theme-color for mobile chrome browser -->
-{Context::addMetaTag("theme-color", $material_colors[$layout_info->primary_color])}
-
-<!--// Load styles -->
-{@Context::set('layout_scss_value', array('grey' => $material_colors['grey'], 'primary_color' => $material_colors[$layout_info->primary_color], 'menu_position' => $layout_info->menu_position, 'content_color' => $layout_info->content_color))}
-<load target="layout.scss" vars="$layout_scss_value" />
+<load target="layout.less" vars="$layout_css_value" />
 <load target="layout.js" />
 
 <div id="simple_layout_skip"><a href="#content">{lang('skip_to_content')}</a></div>
