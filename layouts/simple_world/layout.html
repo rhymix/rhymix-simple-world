@@ -43,15 +43,10 @@
 	
 	// Load styles
 	$primary_color = sscanf($material_colors[$layout_info->primary_color], "#%02x%02x%02x");
-	$content_color = sscanf($layout_info->content_color, "#%02x%02x%02x");
 	Context::set('layout_css_value', array(
 		'primary_color_R' => $primary_color[0],
 		'primary_color_G' => $primary_color[1],
 		'primary_color_B' => $primary_color[2],
-		
-		'content_color_R' => $content_color[0],
-		'content_color_G' => $content_color[1],
-		'content_color_B' => $content_color[2],
 		
 		'menu_position' => $layout_info->menu_position));
 }
@@ -167,6 +162,7 @@
 		</nav>
 		<!--// Footer Menu -->
 		<!--// Language -->
+		<a href="#" class="toggle layout_darkmode_toggle" cond="$layout_info->darkmode != 'N'">{lang('simple_darkmode')}</a>
 		<div class="layout_language" cond="is_countable($lang_supported) && count($lang_supported) > 1">
 			<button type="button" class="toggle">Language: {$lang_supported[$lang_type]}</button>
 			<ul class="selectLang">
@@ -177,3 +173,6 @@
 		<p cond="$layout_info->FOOTER">{$layout_info->FOOTER}</p>
 	</div>
 </footer>
+<script>
+var layout_darkmode_enabled = '{($layout_info->darkmode != 'N')?'Y':'N'}';
+</script>

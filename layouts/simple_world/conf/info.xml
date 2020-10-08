@@ -4,8 +4,8 @@
 	<title xml:lang="en">Simple World</title>
 	<description xml:lang="ko">깔끔한 면과 그림자 레이아웃</description>
 	<description xml:lang="en">Rectangular planes and shadows</description>
-	<version>1.1.0</version>
-	<date>2020-10-07</date>
+	<version>1.2.0</version>
+	<date>2020-10-09</date>
 	<author email_address="misol.kr@gmail.com" link="https://github.com/misol">
 		<name xml:lang="ko">misol</name>
 		<name xml:lang="en">misol</name>
@@ -189,11 +189,19 @@
 			<description xml:lang="ko">분위기를 형성하는데 사용되는 중심 색상을 위에서 선택하지 않고 Hex 코드로 직접 입력 합니다. (기본 값: #f44336) 위 항목에서 '커스텀' 항목을 선택해야 적용됩니다.</description>
 			<description xml:lang="en">Please type the mood color you want, if there is no choice before. Insert your color in hex code. (dafault value:  #f44336) To use this option, you have to select 'Customized' for the options before.</description>
 		</var>
-		<var name="content_color" type="colorpicker">
-			<title xml:lang="ko">본문 영역 색상</title>
-			<title xml:lang="en">Content area color</title>
-			<description xml:lang="ko">레이아웃 본문 영역 색상을 지정합니다. 기본 색상은 흰색입니다.</description>
-			<description xml:lang="en">Set content area color. The default color is white.</description>
+		<var name="darkmode" type="select">
+			<title xml:lang="ko">다크모드</title>
+			<title xml:lang="en">Darkmode</title>
+			<description xml:lang="ko">다크모드를 지원할 수 있습니다. 스킨에 따라 호환이 가능할 수 있습니다. 다크모드에서는 is_darktheme 쿠키가 Y 또는 N으로 설정됩니다.</description>
+			<description xml:lang="en">Enable darkmode. When the darkmode is enabled, is_darktheme cookie would be Y or N.</description>
+			<options value="Y">
+				<title xml:lang="ko">활성화</title>
+				<title xml:lang="en">Enabled</title>
+			</options>
+			<options value="N">
+				<title xml:lang="ko">비활성화</title>
+				<title xml:lang="en">Diabled</title>
+			</options>
 		</var>
 	</extra_vars>
 </layout>

@@ -19,7 +19,6 @@
 
 @grey: #9e9e9e;
 @primary-color: rgb(@primary_color_R, @primary_color_G, @primary_color_B);
-@content-color: rgb(@content_color_R, @content_color_G, @content_color_B);
 
 body {
 	margin:0;
@@ -28,7 +27,7 @@ body {
 }
 /* Skin to content */
 #simple_layout_skip {
-	background-color: lighten(@grey, 35%);
+	background-color: darken(@grey, 35%);
 	position: relative;
 	margin:0;
 	
@@ -38,6 +37,9 @@ body {
 		line-height:28px;
 		height:0px;
 		overflow: hidden;
+		color: white;
+		text-decoration: none;
+		
 		&:focus {
 			height: auto;
 		}
@@ -49,7 +51,7 @@ body {
 	position: relative;
 	
 	header&, footer&, .layout_frame& .layout_left_content{
-		font-family: 'Spoqa Han Sans', "맑은 고딕", "Apple SD Gothic Neo", "나눔고딕", NanumGothic, 'Nanum Gothic', Arial, Helvetica, sans-serif;
+		font-family: 'Spoqa Han Sans', "맑은 고딕", "Apple SD Gothic Neo", Arial, Helvetica, sans-serif;
 		font-size: 14px;
 	}
 	
@@ -66,6 +68,7 @@ body {
 		background-color: lighten(@primary-color, 10%);
 		z-index: 1;
 		box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+		
 		.layout_header>h1 {
 			margin:0 auto;
 			padding:20px 5px;
@@ -78,6 +81,7 @@ body {
 				padding:0 5px;
 			}
 		}
+		
 		
 		.layout_header {
 			padding:0;
@@ -140,11 +144,49 @@ body {
 				}
 			}
 		}
+		
+		
+		&.layout_darkmode {
+			background-color: darken(@primary-color, 10%);
+			.layout_header {
+				&>h1 {
+					.layoutBW(darken(@primary-color, 10%));
+					a {
+						.layoutBW(darken(@primary-color, 10%));
+					}
+				}
+				input {
+					&[type="text"] {
+						background: darken(@primary-color, 20%);
+						.layoutBW(darken(@primary-color, 20%));
+						&::placeholder {
+							.layoutBW(darken(@primary-color, 20%));
+						}
+						&:hover, &:active, &:focus {
+							background: darken(@primary-color, 50%);
+							.layoutBW(darken(@primary-color, 50%));
+							&::placeholder {
+								.layoutBW(darken(@primary-color, 50%));
+							}
+						}
+					}
+					&[type="submit"] {
+						background: darken(@primary-color,15%);
+						.layoutBW(darken(@primary-color, 15%));
+						&:hover, &:active, &:focus {
+							background:@primary-color;
+							.layoutBW(@primary-color);
+						}
+					}
+				}
+			}
+			
+		}
 	}
 
 	div& {
 		/* body */
-		background-color: @content-color;
+		background-color: #fff;
 		overflow: hidden;
 		
 		.layout_content {
@@ -168,6 +210,11 @@ body {
 			width: 160px;
 			.layout_box(2px);
 			margin-right:-170px;
+		}
+		
+		&.layout_darkmode {
+			background-color: darken(@grey, 45%);
+			color: #fff;
 		}
 	}
 
@@ -350,6 +397,46 @@ body {
 
 	}
 	
+	&.layout_darkmode .layout_menu {
+		background-color: darken(@grey, 31%);
+		
+		li a, .dropbtn {
+			color: white;
+		}
+		li.active>a {
+			background-color: darken(@primary-color, 15%);
+			.layoutBW(darken(@primary-color, 15%));
+		}
+		
+		header& {
+			li a {
+				background-color: darken(@grey, 31%);
+			}
+			li:hover,
+			li:focus,
+			li:active,
+			.layout_focus {
+				background-color: darken(@grey, 40%);
+			}
+		}
+			&-content {
+				background-color: darken(@grey, 40%);
+				box-shadow: 0px 8px 16px 0px rgba(255,255,255,0.2);
+				a {
+					color: white;
+					
+					&:hover,
+					&:active,
+					&:focus {
+						display: block;
+						background-color: darken(@primary-color, 10%);
+						.layoutBW(darken(@primary-color, 10%));
+					}
+				}
+			}
+	}
+	&.layout_darkmode hea .layout_menu {
+	}
 	
 	.layout_footer {
 		.layout_menu li a,  .dropbtn {

@@ -12,4 +12,10 @@
 		<value xml:lang="jp"><![CDATA[%s様、こんにちは!]]></value>
 		<value xml:lang="zh-CN"><![CDATA[%s, 你好!]]></value>
 	</item>
+	<item name="simple_darkmode">
+		<value xml:lang="ko"><![CDATA[다크모드]]></value>
+		<value xml:lang="en"><![CDATA[Darkmode]]></value>
+		<value xml:lang="jp"><![CDATA[ダークモード]]></value>
+		<value xml:lang="zh-CN"><![CDATA[暗模式]]></value>
+	</item>
 </lang>

@@ -121,9 +121,45 @@ jQuery(function($)
 		}
 	}
 
+	function layout_toggleDarkmode() {
+		if(layout_darkmode_enabled != 'Y') return;
+		
+		if(getCookie('is_darktheme') !== 'N') {
+			setCookie('is_dark_theme', null, new Date('Thu, 01 Jan 1970 00:00:01 GMT'));
+			setCookie('is_darktheme', 'N');
+			$('.layout_frame').removeClass('layout_darkmode');
+		}
+		else {
+			setCookie('is_dark_theme', true);
+			setCookie('is_darktheme', 'Y');
+			$('.layout_frame').addClass('layout_darkmode');
+		}
+	}
 	// Language Select
 	$('.layout_language>.toggle').click(function()
 	{
 		$('.selectLang').toggle();
 	});
+	
+	// Dark-mode toggle
+	if (((window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) || (getCookie('is_dark_theme'))) && getCookie('is_darktheme') != 'N' && layout_darkmode_enabled == 'Y') {
+		if ( getCookie('is_dark_theme') != true || !(getCookie('is_darktheme') in {'Y': 1, 'N':1}) ) {
+			setCookie('is_dark_theme', true);
+			setCookie('is_darktheme', 'Y');
+		}
+		$('.layout_frame').addClass('layout_darkmode');
+	}
+	
+	/* mobile hamburger menu toggle */
+	if(layout_darkmode_enabled == 'Y') {
+		$(".layout_darkmode_toggle").each(function()
+		{
+			$( this ).click(function( event )
+			{
+				event.preventDefault();
+				layout_toggleDarkmode( );
+				location.reload();
+			});
+		});
+	}
 });
