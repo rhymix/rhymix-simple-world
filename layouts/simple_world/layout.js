@@ -141,15 +141,6 @@ jQuery(function($)
 		$('.selectLang').toggle();
 	});
 	
-	// Dark-mode toggle
-	if (((window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) || (getCookie('is_dark_theme'))) && getCookie('is_darktheme') != 'N' && layout_darkmode_enabled == 'Y') {
-		if ( getCookie('is_dark_theme') != true || !(getCookie('is_darktheme') in {'Y': 1, 'N':1}) ) {
-			setCookie('is_dark_theme', true);
-			setCookie('is_darktheme', 'Y');
-		}
-		$('.layout_frame').addClass('layout_darkmode');
-	}
-	
 	/* mobile hamburger menu toggle */
 	if(layout_darkmode_enabled == 'Y') {
 		$(".layout_darkmode_toggle").each(function()
@@ -162,4 +153,28 @@ jQuery(function($)
 			});
 		});
 	}
+	// Dark-mode toggle
+	if (((window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) || (getCookie('is_dark_theme'))) && getCookie('is_darktheme') != 'N' && layout_darkmode_enabled == 'Y') {
+		if ( !getCookie('is_dark_theme') || !(getCookie('is_darktheme') == 'Y' || getCookie('is_darktheme') == 'N') ) {
+			setCookie('is_dark_theme', true);
+			setCookie('is_darktheme', 'Y');
+			location.reload();
+		}
+		$('.layout_frame').addClass('layout_darkmode');
+	}
 });
+
+// Dark-mode toggle
+if (getCookie('is_dark_theme') == true && getCookie('is_darktheme') == 'Y' && document.querySelector("meta[name='color-scheme']").getAttribute('content') == 'light dark') {
+	var css = "body { background: black; }",
+	head = document.head || document.getElementsByTagName('head')[0],
+	style = document.createElement('style');
+	head.appendChild(style);
+
+	style.type = 'text/css';
+	if (style.styleSheet){
+		style.styleSheet.cssText = css;
+	} else {
+		style.appendChild(document.createTextNode(css));
+	}
+}
