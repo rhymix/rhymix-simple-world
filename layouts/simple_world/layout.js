@@ -160,7 +160,6 @@ jQuery(function($)
 			setCookie('is_darktheme', 'Y');
 			location.reload();
 		}
-		$('.layout_frame').addClass('layout_darkmode');
 	}
 });
 
