@@ -1,6 +1,7 @@
 <!--// responsible layout -->
 <!--@if($communication_popup === TRUE)-->
 	{@Context::addMetaTag("viewport", "width=device-width, user-scalable=yes")}
+	<!--@if($_COOKIE['is_darktheme']=='Y')--><style>body { background: black;}</style><!--@end-->
 <!--@endif-->
 <load target="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css" />
 <load target="js/communication.js" />
@@ -16,7 +17,10 @@
 	}
 </block>
 <block cond="$layout_info->extra_var->primary_color->type !== 'select' && $layout_info->extra_var->customized_primary_color->type !== 'colorpicker'">
-	{@$layout_info->primary_color = 'red';}
+	{@
+		if(!isset($layout_info)) $layout_info = new stdClass; 
+		$layout_info->primary_color = 'red';
+	}
 </block>
 {@
 	$material_colors = array(
@@ -71,7 +75,7 @@
 </block>
 {@Context::set('simple_less_value', array('red' => hexdec(substr($skin_color, 1, 2)), 'green' => hexdec(substr($skin_color, 3, 2)), 'blue' => hexdec(substr($skin_color, 5, 2)) ))}
 <load target="css/css.less" vars="$simple_less_value" />
-<section class="rx_simple_communication">
+<section class="rx_simple_communication<!--@if($_COOKIE['is_darktheme']=='Y')--> rx_simple_darkmode<!--@end-->">
 	<div class="rx_simple_tab" cond="$communication_popup !== TRUE && $is_logged && $logged_info->menu_list && (!$member_srl || $member_srl == $logged_info->member_srl)">
 		<ul class="rx_simple_tab">
 			<li loop="$logged_info->menu_list=>$key,$val" class="active"|cond="$key==$act">

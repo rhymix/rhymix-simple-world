@@ -162,18 +162,3 @@ jQuery(function($)
 		}
 	}
 });
-
-// Dark-mode toggle
-if (getCookie('is_dark_theme') == true && getCookie('is_darktheme') == 'Y' && document.querySelector("meta[name='color-scheme']").getAttribute('content') == 'light dark') {
-	var css = "body { background: black; }",
-	head = document.head || document.getElementsByTagName('head')[0],
-	style = document.createElement('style');
-	head.appendChild(style);
-
-	style.type = 'text/css';
-	if (style.styleSheet){
-		style.styleSheet.cssText = css;
-	} else {
-		style.appendChild(document.createTextNode(css));
-	}
-}

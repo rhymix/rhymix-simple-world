@@ -11,7 +11,10 @@
 	}
 </block>
 <block cond="$layout_info->extra_var->primary_color->type !== 'select' && $layout_info->extra_var->customized_primary_color->type !== 'colorpicker'">
-	{@$layout_info->primary_color = 'red';}
+	{@
+		if(!isset($layout_info)) $layout_info = new stdClass; 
+		$layout_info->primary_color = 'red';
+	}
 </block>
 {@
 	$material_colors = array(

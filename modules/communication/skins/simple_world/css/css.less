@@ -90,7 +90,7 @@ section.rx_simple_communication {
 	/* message; error, info, update */
 	.rx_member-notice, .rx_member-notice.info
 	{
-		.bg-contrast(#000; lighten(@color, 5%); darken(@color, 5%); 5.0);
+		.bg-contrast(#000; lighten(@color, 5%); darken(@color, 5%); 1.0);
 		color: #000;
 		padding: 15px;
 		margin:0;
@@ -171,7 +171,7 @@ section.rx_simple_communication {
 	}
 	.pagination ul li.active>a
 	{
-		.bg-contrast(#000; lighten(@color, 5%); darken(@color, 5%), 2.0);
+		.bg-contrast(#000; lighten(@color, 5%); darken(@color, 5%), 1);
 		font-weight:bold;
 		color:#000;
 	}
@@ -234,7 +234,7 @@ section.rx_simple_communication {
 				margin-bottom: 2px;
 			}
 			&>input[type="submit"], &>input.btn.dateRemover {
-				.bg-contrast(#000; lighten(@color,5%); darken(@color,5%); 3.0);
+				.bg-contrast(#000; lighten(@color,5%); darken(@color,5%); 1.0);
 			}
 		}
 	}
@@ -372,14 +372,90 @@ section.rx_simple_communication {
 	/* button hover */
 	form div.control-group>input[type="submit"], .sw-footer>a, .sw-anchor-buttons input[type="submit"], .sw-anchor-buttons a, .sw-anchor-buttons button, .pagination ul li>a{
 		&:hover, &:focus{
-			.bg-contrast(#000; lighten(@color,5%); darken(@color,5%); 4.0);
+			.bg-contrast(#000; lighten(@color,5%); darken(@color,5%); 1.0);
 			color: #000;
 			box-shadow: 0 2px 4px rgba(0,0,0,0.16), 0 2px 4px rgba(0,0,0,0.23);
 		}
 	}
 
-}
-@media (prefers-color-scheme: dark) {
-	section.rx_simple_communication {
+	&.rx_simple_darkmode {
+		color: #fff;
+		a
+		{
+			.text-contrast(#000; darken(@color,5%); lighten(@color,5%));
+			text-decoration: none;
+		}
+	
+		.sw-body
+		{
+			background: rgba(255, 255, 255, 0.1);
+			
+			h1
+			{
+				color: #eee;
+			}
+		}
+		div.rx_simple_tab
+		{
+			background: rgba(255, 255, 255, 0.1);
+		}
+		
+		form div.control-group>input[type="submit"], form div.control-group>input.btn.dateRemover, .sw-footer>a, .sw-anchor-buttons a
+		{
+			.bg-contrast(#fff; lighten(@color,10%); darken(@color,10%); 1.0);
+			color: #fff;
+		}
+		ul.rx_simple_tab
+		{
+			&>li
+			{
+				a
+				{
+					color: #fff;
+				}
+				a:hover, a:focus, &.active a {
+					.text-contrast(#000; darken(@color,5%); lighten(@color,5%));
+					font-weight: 700;
+				}
+			}
+		}
+
+		/* The list of document style */
+		.rx_sw_list
+		{
+			.cont_a
+			{
+				color: #eee;
+				&:hover, &:focus {
+					.text-contrast(#eee; darken(@color,5%); lighten(@color,5%));
+				}
+			}
+		}
+		
+		
+		.rx_sw_list .content_delete{
+			button{
+				background: darken(@color, 5%);
+				.text-contrast(darken(@color, 5%));
+			}
+		}
+		.pagination ul li>a, .sw-footer>a
+		{
+			background: rgba(255, 255, 255, 0.1);
+			color: #eee;
+		}
+		.pagination ul li.active>a
+		{
+			.bg-contrast(#fff; lighten(@color, 5%); darken(@color, 5%), 1.0);
+			color:#fff;
+		}
+
+		/* button hover */
+		form div.control-group>input[type="submit"]:hover, form div.control-group>input.btn.dateRemover:hover, .sw-footer>a:hover, .sw-anchor-buttons a:hover, .pagination ul li>a:hover, .rx_sw_list .content_delete button:hover,
+		form div.control-group>input[type="submit"]:focus, form div.control-group>input.btn.dateRemover:focus, .sw-footer>a:focus, .sw-anchor-buttons a:focus, .pagination ul li>a:focus, .rx_sw_list .content_delete button:focus
+		{
+			.bg-contrast(#fff; lighten(@color,10%); darken(@color,10%); 0.5);
+			color: #fff;
+		}
 	}
 }
