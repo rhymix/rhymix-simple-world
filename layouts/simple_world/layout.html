@@ -54,7 +54,7 @@
 <!--@if($_COOKIE['is_darktheme']=='Y' && $layout_info->darkmode != 'N')--><style>body { background: black;}</style><!--@end-->
 
 <div id="simple_layout_skip"><a href="#content">{lang('skip_to_content')}</a></div>
-<header class="layout_frame<!--@if($_COOKIE['is_darktheme']=='Y')--> layout_darkmode<!--@end-->">
+<header class="layout_frame<!--@if($_COOKIE['rx_color_scheme']=='dark')--> layout_darkmode<!--@end-->">
 	<div class="layout_header layout_canvas">
 		<h1>
 			<a href="<!--@if($layout_info->logo_url)-->{$layout_info->logo_url}<!--@elseif(Context::getDefaultUrl())-->{Context::getDefaultUrl()}<!--@else-->{getUrl('')}<!--@end-->" id="siteTitle">
@@ -84,7 +84,7 @@
 		</div>
 	</div>
 	<!--// Menu -->
-	<nav class="layout_frame layout_menu<!--@if($_COOKIE['is_darktheme']=='Y')--> layout_darkmode<!--@end-->" id="layout_gnb">
+	<nav class="layout_frame layout_menu<!--@if($_COOKIE['rx_color_scheme']=='dark')--> layout_darkmode<!--@end-->" id="layout_gnb">
 		<ul>
 			<li class="layout_dropdown">
 				<a href="{getUrl('act', 'dispMemberLoginForm')}" cond="!$is_logged">{sprintf(lang('simple_hello'), lang('simple_guest'))}</a>
@@ -119,7 +119,7 @@
 	</nav>
 	<!--// Menu -->
 </header>
-<div class="layout_frame layout_body<!--@if(in_array($layout_info->left_space, array('Y', 'YM')))--> layout_left_content<!--@end--><!--@if($_COOKIE['is_darktheme']=='Y')--> layout_darkmode<!--@end-->">
+<div class="layout_frame layout_body<!--@if(in_array($layout_info->left_space, array('Y', 'YM')))--> layout_left_content<!--@end--><!--@if($_COOKIE['rx_color_scheme']=='dark')--> layout_darkmode<!--@end-->">
 	<!--// VISUAL -->
 	<div class="layout_body layout_canvas">
 		<!--// CONTENT -->
@@ -149,7 +149,7 @@
 		</div>
 	</div>
 </div>
-<footer class="layout_frame layout_footer<!--@if($_COOKIE['is_darktheme']=='Y')--> layout_darkmode<!--@end-->">
+<footer class="layout_frame layout_footer<!--@if($_COOKIE['rx_color_scheme']=='dark')--> layout_darkmode<!--@end-->">
 	<div class="layout_footer layout_canvas">
 		<!--// Footer Menu -->
 		<nav class="layout_menu" id="layout_fnb" cond="is_countable($FNB->list) && count($FNB->list)">
