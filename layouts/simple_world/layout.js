@@ -162,5 +162,6 @@ jQuery(function($)
 	}
 	if (getColorScheme() == 'light' && getCookie('is_dark_theme')) {
 		setCookie('is_dark_theme', null, new Date('Thu, 01 Jan 1970 00:00:01 GMT'));
+		location.reload();
 	}
 });
