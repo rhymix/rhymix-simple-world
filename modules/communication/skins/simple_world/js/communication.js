@@ -100,4 +100,8 @@ jQuery(function($){
 			return false;
 		}
 	});
+	/* init color-scheme (auto) */
+	if (getColorScheme() == 'dark' && !getCookie('rx_color_scheme')) {
+		$('.rx_simple_communication').addClass('rx_simple_darkmode');
+	}
 });

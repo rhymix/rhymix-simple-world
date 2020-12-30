@@ -161,8 +161,12 @@ function insertSelectedModule(id, module_srl, mid, browser_title) {
     location.href = current_url.setQuery('selected_module_srl',module_srl);
 }
 
-/* 스크랩 폴더 이동 */
 jQuery(function($) {
+	/* init color-scheme (auto) */
+	if (getColorScheme() == 'dark' && !getCookie('rx_color_scheme')) {
+		$('.rx_simple_member').addClass('rx_simple_darkmode');
+	}
+	/* 스크랩 폴더 이동 */
 	$("#scrap_folder_create").on("click", function() {
 		var input = $(this).siblings("input.folder_name").first();
 		if (!input.is(":visible")) {
