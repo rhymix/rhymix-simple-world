@@ -51,7 +51,7 @@
 <load target="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css" />
 <load target="layout.less" vars="$layout_css_value" />
 <load target="layout.js" />
-<!--@if($_COOKIE['is_darktheme']=='Y' && $layout_info->darkmode != 'N')--><style>body { background: black;}</style><!--@end-->
+<!--@if($_COOKIE['rx_color_scheme']=='dark')--><style>body { background: black;}</style><!--@end-->
 
 <div id="simple_layout_skip"><a href="#content">{lang('skip_to_content')}</a></div>
 <header class="layout_frame<!--@if($_COOKIE['rx_color_scheme']=='dark')--> layout_darkmode<!--@end-->">
@@ -161,7 +161,7 @@
 		</nav>
 		<!--// Footer Menu -->
 		<!--// Language -->
-		<a href="#" class="toggle layout_darkmode_toggle" cond="$layout_info->darkmode != 'N'">{lang('simple_darkmode')}</a>
+		<a href="#" class="toggle layout_darkmode_toggle" cond="$layout_info->darkmode == 'Y'">{lang('simple_darkmode')}</a>
 		<div class="layout_language" cond="is_countable($lang_supported) && count($lang_supported) > 1">
 			<button type="button" class="toggle">Language: {$lang_supported[$lang_type]}</button>
 			<ul class="selectLang">
@@ -173,5 +173,5 @@
 	</div>
 </footer>
 <script>
-var layout_darkmode_enabled = '{($layout_info->darkmode != 'N')?'Y':'N'}';
+var layout_darkmode_enabled = '{($layout_info->darkmode)?$layout_info->darkmode:'Auto'}';
 </script>

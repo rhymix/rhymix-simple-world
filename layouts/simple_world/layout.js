@@ -122,26 +122,17 @@ jQuery(function($)
 	}
 
 	function layout_toggleDarkmode() {
-		if(layout_darkmode_enabled !== 'Y') return;
+		if(layout_darkmode_enabled != 'Y') return;
 		
-		if(getCookie('rx_color_scheme') === 'light') {
+		if(getColorScheme() === 'light') {
 			setColorScheme('dark');
-			$('.layout_frame').removeClass('layout_darkmode');
-		}
-		else if(getCookie('rx_color_scheme') === 'dark') {
-			setColorScheme('light');
 			$('.layout_frame').addClass('layout_darkmode');
+			setCookie('is_dark_theme', true);
 		}
-		else {
-			setColorScheme('auto');
-			// Auto dark mode
-			if (layout_darkmode_enabled !== 'N' && getColorScheme() === 'dark' && !getCookie('rx_color_scheme')) {
-				$('.layout_frame').addClass('layout_darkmode');
-			}
-			else
-			{
-				$('.layout_frame').removeClass('layout_darkmode');
-			}
+		else if(getColorScheme() === 'dark') {
+			setColorScheme('light');
+			$('.layout_frame').removeClass('layout_darkmode');
+			setCookie('is_dark_theme', null, new Date('Thu, 01 Jan 1970 00:00:01 GMT'));
 		}
 	}
 	// Language Select
@@ -150,20 +141,26 @@ jQuery(function($)
 		$('.selectLang').toggle();
 	});
 	
-	/* mobile hamburger menu toggle */
-	if(layout_darkmode_enabled == 'Y') {
-		$(".layout_darkmode_toggle").each(function()
+	/* darkmode toggle */
+	$(".layout_darkmode_toggle").each(function()
+	{
+		$( this ).click(function( event )
 		{
-			$( this ).click(function( event )
-			{
-				event.preventDefault();
-				layout_toggleDarkmode( );
-				location.reload();
-			});
+			event.preventDefault();
+			layout_toggleDarkmode( );
+			return false;
 		});
-	}
+	});
+	
 	// Auto dark mode
-	if (layout_darkmode_enabled !== 'N' && getColorScheme() === 'dark' && !getCookie('rx_color_scheme')) {
+	if (layout_darkmode_enabled != 'N' && getColorScheme() == 'dark' && !getCookie('rx_color_scheme')) {
 		$('.layout_frame').addClass('layout_darkmode');
+		setCookie('is_dark_theme', true);
+	}
+	if (getColorScheme() == 'dark' && !getCookie('is_dark_theme')) {
+		setCookie('is_dark_theme', true);
+	}
+	if (getColorScheme() == 'light' && getCookie('is_dark_theme')) {
+		setCookie('is_dark_theme', null, new Date('Thu, 01 Jan 1970 00:00:01 GMT'));
 	}
 });
