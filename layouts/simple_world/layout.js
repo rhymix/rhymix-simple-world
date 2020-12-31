@@ -155,10 +155,10 @@ jQuery(function($)
 	// Auto dark mode
 	if (layout_darkmode_enabled != 'N' && getColorScheme() == 'dark' && !getCookie('rx_color_scheme')) {
 		$('.layout_frame').addClass('layout_darkmode');
-		setCookie('is_dark_theme', true);
-	}
-	if (getColorScheme() == 'dark' && !getCookie('is_dark_theme')) {
-		setCookie('is_dark_theme', true);
+		if (getColorScheme() == 'dark' && !getCookie('is_dark_theme')) {
+			setCookie('is_dark_theme', true);
+			location.reload();
+		}
 	}
 	if (getColorScheme() == 'light' && getCookie('is_dark_theme')) {
 		setCookie('is_dark_theme', null, new Date('Thu, 01 Jan 1970 00:00:01 GMT'));

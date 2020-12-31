@@ -205,3 +205,42 @@ script, style
 	color: #000;
 	box-shadow: 0 2px 4px rgba(0,0,0,0.16), 0 2px 4px rgba(0,0,0,0.23);
 }
+.color_scheme_dark {
+	background: #000;
+	color: #fff;
+	/* message; error, info, update */
+	.rx_message-notice, .rx_message-notice.info
+	{
+		.bg-contrast(#fff; lighten(@color, 5%); darken(@color, 5%); 5.0);
+		color: #fff;
+	}
+	/* message forms */
+	.rx_simple_message .sw-body
+	{
+		background:rgba(255,255,255,0.3);
+		box-shadow: 0 1px 2px rgba(255,255,255,0.16), 0 1px 2px rgba(255,255,255,0.23);
+	}
+	.rx_simple_message form div.control-group>input[type="submit"], .rx_simple_message form div.control-group>input.btn.dateRemover, .rx_simple_message .sw-footer>a, .rx_simple_message .sw-anchor-buttons a
+	{
+		.bg-contrast(#fff; darken(@color,5%); darken(@color,5%); 3.0);
+		box-shadow: 0 1px 2px rgba(255,255,255,0.16), 0 1px 2px rgba(255,255,255,0.23);
+		color: #fff;
+	}
+
+	.rx_simple_message .sw-footer>a
+	{
+		background: #000;
+		box-shadow: 0 1px 2px rgba(255,255,255,0.16), 0 1px 2px rgba(255,255,255,0.23);
+		color: #fff;
+	}
+
+	/* button hover */
+	.rx_simple_message form div.control-group>input[type="submit"]:hover, .rx_simple_message form div.control-group>input.btn.dateRemover:hover, .rx_simple_message .sw-footer>a:hover, .rx_simple_message .sw-anchor-buttons a:hover, .rx_simple_message .pagination ul li>a:hover, .rx_simple_message .rx_sw_list .content_delete button:hover,
+	.rx_simple_message form div.control-group>input[type="submit"]:focus, .rx_simple_message form div.control-group>input.btn.dateRemover:focus, .rx_simple_message .sw-footer>a:focus, .rx_simple_message .sw-anchor-buttons a:focus, .rx_simple_message .pagination ul li>a:focus, .rx_simple_message .rx_sw_list .content_delete button:focus
+	{
+
+		.bg-contrast(#fff; darken(@color,5%); darken(@color,5%); 3.0);
+		color: #fff;
+		box-shadow: 0 2px 4px rgba(255,255,255,0.16), 0 2px 4px rgba(255,255,255,0.23);
+	}
+}
