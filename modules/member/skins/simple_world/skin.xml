@@ -4,8 +4,9 @@
 	<title xml:lang="en">Simple World</title>
 	<description xml:lang="ko">깔끔한 면과 그림자를 이용한 회원 스킨</description>
 	<description xml:lang="en">Simple rectangular planes and shadows</description>
-	<version>0.3</version>
-	<date>2020-12-31</date>
+	<version>0.3.2</version>
+	<date>2021-02-18</date>
+	<license>GPLv2</license>
 	<author email_address="misol.kr@gmail.com" link="https://github.com/misol">
 		<name xml:lang="ko">misol</name>
 		<name xml:lang="en">misol</name>
